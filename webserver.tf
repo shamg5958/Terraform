@@ -3,6 +3,7 @@ resource "aws_security_group" "webserver_access" {
         name = "webserver_access"
         description = "allow ssh and http"
         vpc_id      = "vpc-08c090020d8bec0d4"
+	provider    = aws.usa
         ingress {
                 from_port = 80
                 to_port = 80
@@ -32,6 +33,7 @@ resource "aws_instance" "webserver" {
   ami           = "ami-0341d95f75f311023"
   availability_zone = "us-east-1b"
   instance_type = "t2.micro"
+  provider	= aws.usa
   security_groups = ["${aws_security_group.webserver_access.name}"] 
   /* the key zoomkey must be downloaded in your machine from where
   you are executing this code. So first create the key, download it
